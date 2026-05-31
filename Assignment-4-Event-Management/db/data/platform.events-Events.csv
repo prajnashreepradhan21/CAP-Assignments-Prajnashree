@@ -1,0 +1,5 @@
+ID,title,description,eventType,venueId,startDate,endDate,startTime,endTime,maxAttendees,registeredCount,ticketPrice,status,organizerName,organizerEmail,tags
+00000000-0000-0000-0000-000000000201,SAP CAP Workshop,CAP Development Workshop,Workshop,00000000-0000-0000-0000-000000000101,2026-06-10,2026-06-10,10:00:00,16:00:00,200,120,500,Published,Prajnashree,admin@tech.com,"SAP,CAP"
+00000000-0000-0000-0000-000000000202,AI Conference,Latest AI Trends,Conference,00000000-0000-0000-0000-000000000102,2026-07-05,2026-07-05,09:00:00,17:00:00,300,80,1000,Draft,Raj Sharma,raj@tech.com,"AI,ML"
+00000000-0000-0000-0000-000000000203,Cyber Security Seminar,Security Awareness,Seminar,00000000-0000-0000-0000-000000000102,2026-08-01,2026-08-01,11:00:00,15:00:00,150,60,300,Published,Amit Rout,amit@tech.com,Security
+00000000-0000-0000-0000-000000000204,Cloud Meetup,Cloud Technologies Meetup,Meetup,00000000-0000-0000-0000-000000000103,2026-06-20,2026-06-20,18:00:00,20:00:00,500,220,0,Published,Priya Das,priya@tech.com,Cloud

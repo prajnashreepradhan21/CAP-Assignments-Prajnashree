@@ -1,0 +1,61 @@
+### GET courses filtered by department and semester
+GET http://localhost:4004/odata/v4/university/Courses?$filter=departmentCode eq 'CS' and semester eq 3
+
+
+### GET students with CGPA above 8.0
+GET http://localhost:4004/odata/v4/university/Students?$filter=cgpa gt 8.0
+
+
+### POST new student enrollment
+POST http://localhost:4004/odata/v4/university/Enrollments
+Content-Type: application/json
+
+{
+  "studentId": "00000000-0000-0000-0000-000000000207",
+  "courseCode": "CS102",
+  "enrollmentDate": "2026-06-01",
+  "attendancePercent": 85
+}
+
+
+### GET all enrollments for a specific student
+GET http://localhost:4004/odata/v4/university/Enrollments?$filter=studentId eq 00000000-0000-0000-0000-000000000201
+
+
+### Filter courses where seats are available
+GET http://localhost:4004/odata/v4/university/Courses?$filter=currentEnrolled lt maxStudents
+
+
+### PATCH enrollment to add grade
+PATCH http://localhost:4004/odata/v4/university/Enrollments(studentId=00000000-0000-0000-0000-000000000201,courseCode='CS102')
+Content-Type: application/json
+
+{
+  "status": "Completed",
+  "grade": "A",
+  "gradePoints": 9.99
+}
+
+
+### GET students filtered by department
+GET http://localhost:4004/odata/v4/university/Students?$filter=departmentCode eq 'CS'
+
+
+### Sort students by CGPA
+GET http://localhost:4004/odata/v4/university/Students?$orderby=cgpa desc
+
+
+### Select only specific fields for students
+GET http://localhost:4004/odata/v4/university/Students?$select=firstName,lastName,cgpa
+
+
+### Get top 3 students by CGPA
+GET http://localhost:4004/odata/v4/university/Students?$top=3
+
+
+### GET top 3 students with CGPA above 8.0, sorted by CGPA
+GET http://localhost:4004/odata/v4/university/Students?$filter=cgpa gt 8&$orderby=cgpa desc&$select=firstName,lastName,cgpa&$top=3
+
+
+### Verify SQLite data loaded
+GET http://localhost:4004/odata/v4/university/Students/$count

@@ -1,0 +1,6 @@
+ID,firstName,lastName,dateOfBirth,gender,bloodGroup,phone,email,address,emergencyContact,registrationDate
+00000000-0000-0000-0000-000000000201,Ravi,Kumar,1998-05-10,Male,OPositive,9111111111,ravi@gmail.com,Bhubaneswar,9888888881,2026-05-01
+00000000-0000-0000-0000-000000000202,Pooja,Das,2000-08-15,Female,APositive,9111111112,pooja@gmail.com,Cuttack,9888888882,2026-05-02
+00000000-0000-0000-0000-000000000203,Sumit,Patra,1997-03-20,Male,BPositive,9111111113,sumit@gmail.com,Puri,9888888883,2026-05-03
+00000000-0000-0000-0000-000000000204,Anjali,Sahoo,2001-11-05,Female,ABPositive,9111111114,anjali@gmail.com,Sambalpur,9888888884,2026-05-04
+00000000-0000-0000-0000-000000000205,Karan,Rout,1999-09-18,Male,ONegative,9111111115,karan@gmail.com,Rourkela,9888888885,2026-05-05

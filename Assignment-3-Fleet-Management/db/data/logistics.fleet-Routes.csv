@@ -1,0 +1,6 @@
+ID,fromCity,toCity,distance,estimatedHours,tollCharges,isActive
+00000000-0000-0000-0000-000000000501,Bhubaneswar,Cuttack,30,1.0,0,true
+00000000-0000-0000-0000-000000000502,Cuttack,Puri,90,2.0,50,true
+00000000-0000-0000-0000-000000000503,Bhubaneswar,Puri,65,1.5,20,true
+00000000-0000-0000-0000-000000000504,Bhubaneswar,Rourkela,320,6.5,250,true
+00000000-0000-0000-0000-000000000505,Cuttack,Rourkela,300,6.0,200,true

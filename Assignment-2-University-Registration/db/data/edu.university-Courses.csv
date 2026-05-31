@@ -1,0 +1,7 @@
+code,title,description,credits,maxStudents,currentEnrolled,semester,departmentCode,professorId,schedule,roomNumber,isActive
+CS101,Programming Fundamentals,Basics of Programming,4,60,45,1,CS,00000000-0000-0000-0000-000000000101,MWF 10:00-11:00,A201,true
+CS102,Data Structures,Core DS Concepts,4,60,40,3,CS,00000000-0000-0000-0000-000000000104,MWF 11:00-12:00,A202,true
+IT101,Database Systems,SQL and DBMS,4,50,30,2,IT,00000000-0000-0000-0000-000000000102,TTS 10:00-11:00,B201,true
+IT201,Cloud Computing,AWS Basics,3,40,20,5,IT,00000000-0000-0000-0000-000000000105,TTS 02:00-03:00,B202,true
+EC101,Digital Electronics,Logic Gates,4,50,25,1,EC,00000000-0000-0000-0000-000000000103,MWF 09:00-10:00,C201,true
+EC201,Microprocessors,8086 Basics,4,40,18,4,EC,00000000-0000-0000-0000-000000000103,MWF 01:00-02:00,C202,true

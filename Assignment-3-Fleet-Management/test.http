@@ -1,0 +1,70 @@
+### GET available vehicles
+GET http://localhost:4004/odata/v4/logistics/Vehicles?$filter=status eq 'Available'
+
+
+### GET shipments filtered by status InTransit
+GET http://localhost:4004/odata/v4/logistics/Shipments?$filter=status eq 'InTransit'
+
+
+### GET all shipments for a specific customer
+GET http://localhost:4004/odata/v4/logistics/Shipments?$filter=customerId eq 00000000-0000-0000-0000-000000000301
+
+
+### POST a new shipment booking
+POST http://localhost:4004/odata/v4/logistics/Shipments
+Content-Type: application/json
+
+{
+  "trackingNumber": "SL-2026-00009",
+  "customerId": "00000000-0000-0000-0000-000000000301",
+  "driverId": "00000000-0000-0000-0000-000000000201",
+  "vehicleId": "00000000-0000-0000-0000-000000000101",
+  "pickupAddress": "Unit-1",
+  "deliveryAddress": "CDA",
+  "pickupCity": "Bhubaneswar",
+  "deliveryCity": "Cuttack",
+  "weight": 50,
+  "bookedAt": "2026-06-05T10:00:00Z",
+  "estimatedDelivery": "2026-06-06T10:00:00Z",
+  "actualDistance": 30,
+  "charges": 600
+}
+
+
+### PATCH shipment status to Delivered and set deliveredAt
+PATCH http://localhost:4004/odata/v4/logistics/Shipments(ID=00000000-0000-0000-0000-000000000401)
+Content-Type: application/json
+
+{
+  "status": "Delivered",
+  "deliveredAt": "2026-06-06T15:00:00Z",
+  "paymentStatus": "Paid"
+}
+
+
+### GET routes between two cities
+GET http://localhost:4004/odata/v4/logistics/Routes?$filter=fromCity eq 'Bhubaneswar' and toCity eq 'Cuttack'
+
+
+### GET drivers sorted by rating descending
+GET http://localhost:4004/odata/v4/logistics/Drivers?$orderby=rating desc
+
+
+### GET only Diesel vehicles    
+GET http://localhost:4004/odata/v4/logistics/Vehicles?$filter=fuelType eq 'Diesel'
+
+
+### GET shipments sorted by charges descending
+GET http://localhost:4004/odata/v4/logistics/Shipments?$orderby=charges desc
+
+
+### Select only specific fields for drivers
+GET http://localhost:4004/odata/v4/logistics/Drivers?$select=name,rating,status
+
+
+### Get top 3 most expensive shipments
+GET http://localhost:4004/odata/v4/logistics/Shipments?$top=3
+
+
+### SQLite deployment verification
+GET http://localhost:4004/odata/v4/logistics/Vehicles/$count

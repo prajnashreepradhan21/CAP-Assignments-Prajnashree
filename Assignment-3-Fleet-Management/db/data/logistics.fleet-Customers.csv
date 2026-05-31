@@ -1,0 +1,5 @@
+ID,name,company,phone,email,address,city,pincode,gstNumber,tier
+00000000-0000-0000-0000-000000000301,Ravi Kumar,RK Traders,9111111111,ravi@gmail.com,Unit-1,Bhubaneswar,751001,GST001,Regular
+00000000-0000-0000-0000-000000000302,Pooja Das,PD Foods,9111111112,pooja@gmail.com,CDA,Cuttack,753001,GST002,Premium
+00000000-0000-0000-0000-000000000303,Sumit Patra,SP Electronics,9111111113,sumit@gmail.com,Station Road,Puri,752001,GST003,Enterprise
+00000000-0000-0000-0000-000000000304,Anjali Sahoo,AS Logistics,9111111114,anjali@gmail.com,Main Road,Rourkela,769001,GST004,Premium

@@ -1,0 +1,4 @@
+ID,name,address,city,capacity,type,amenities,hourlyRate,contactPerson,phone,isActive
+00000000-0000-0000-0000-000000000101,KIIT Auditorium,Patia,Bhubaneswar,500,Auditorium,Projector WiFi AC,5000,Raj Sharma,9876543210,true
+00000000-0000-0000-0000-000000000102,Tech Hall,CDA,Cuttack,300,ConferenceHall,WiFi AC,3500,Priya Das,9876543211,true
+00000000-0000-0000-0000-000000000103,Open Ground,Marine Drive,Puri,1000,Outdoor,Stage Parking,8000,Amit Rout,9876543212,true

@@ -1,0 +1,6 @@
+ID,name,email,phone,bio,company,designation,expertise,photoUrl,rating,totalTalks,isActive
+00000000-0000-0000-0000-000000000301,Raj Sharma,raj@gmail.com,9000000001,SAP Expert,SAP,Architect,SAP CAP,photo1.jpg,4.8,50,true
+00000000-0000-0000-0000-000000000302,Priya Patel,priya@gmail.com,9000000002,AI Specialist,TCS,Lead,Artificial Intelligence,photo2.jpg,4.9,40,true
+00000000-0000-0000-0000-000000000303,Amit Das,amit@gmail.com,9000000003,Cloud Consultant,Infosys,Manager,AWS Cloud,photo3.jpg,4.7,35,true
+00000000-0000-0000-0000-000000000304,Neha Singh,neha@gmail.com,9000000004,Cyber Expert,Wipro,Director,Cyber Security,photo4.jpg,4.6,45,true
+00000000-0000-0000-0000-000000000305,Rohan Roy,rohan@gmail.com,9000000005,Data Analyst,Accenture,Consultant,Data Analytics,photo5.jpg,4.8,30,true
