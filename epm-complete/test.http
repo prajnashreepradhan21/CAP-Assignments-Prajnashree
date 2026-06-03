@@ -1,0 +1,68 @@
+### 1. Get all products - SalesService
+GET http://localhost:4004/odata/v4/sales/Products
+
+
+### 2. Get customers
+GET http://localhost:4004/odata/v4/sales/Customers
+
+
+### 3. Sales Orders with Items expand
+GET http://localhost:4004/odata/v4/sales/SalesOrders?$expand=items
+
+
+### 4. Sales Orders expand customer and items
+GET http://localhost:4004/odata/v4/sales/SalesOrders?$expand=customer,items
+
+
+### 5. Products filter stock less than 10
+GET http://localhost:4004/odata/v4/admin/Products?$filter=stock lt 10
+
+
+### 6. Products order by price descending
+GET http://localhost:4004/odata/v4/admin/Products?$orderby=price desc
+
+
+### 7. Product Catalog report
+GET http://localhost:4004/odata/v4/report/ProductCatalog
+
+
+### 8. Low Stock Alert report
+GET http://localhost:4004/odata/v4/report/LowStockAlert
+
+
+### 9. Order Report
+GET http://localhost:4004/odata/v4/report/OrderReport
+
+
+### 10. Purchase Orders with Items
+GET http://localhost:4004/odata/v4/admin/PurchaseOrders?$expand=items
+
+
+### 11. Deep Insert Sales Order
+POST http://localhost:4004/odata/v4/sales/SalesOrders
+Content-Type: application/json
+
+{
+  "orderNumber": "SO-005",
+  "customer_ID": "c1111111-1111-1111-1111-111111111111",
+  "orderDate": "2026-06-05",
+  "totalAmount": 3300,
+  "taxAmount": 594,
+  "netAmount": 3894,
+  "currency_code": "INR",
+  "status": "Created",
+  "items": [
+    {
+      "product_ID": "p3333333-3333-3333-3333-333333333333",
+      "quantity": 1,
+      "unitPrice": 800,
+      "netAmount": 800
+    },
+    {
+      "product_ID": "p4444444-4444-4444-4444-444444444444",
+      "quantity": 1,
+      "unitPrice": 2500,
+      "netAmount": 2500
+    }
+  ]
+}
