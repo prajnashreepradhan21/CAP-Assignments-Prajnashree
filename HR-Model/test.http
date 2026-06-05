@@ -77,6 +77,7 @@ Content-Type: application/json
   "endDate": "2026-07-04",
   "employee_ID": "ac74730b-715c-4336-992b-100a1179334d",
   "project_ID": "2d9ff4cb-7ff6-4e20-ae1e-ceaae20b00a6"
+  
 }
 ### Employee with Department and Assignments
 GET http://localhost:4004/hr/Employees?$expand=department,assignments
