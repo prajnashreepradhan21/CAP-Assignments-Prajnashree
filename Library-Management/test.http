@@ -1,0 +1,106 @@
+### Get books WITH author details:
+GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=author
+
+### Get books WITH genre details:
+GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=genre
+
+### Get books with BOTH author and genre:
+GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=author,genre
+
+### Get an author WITH all their books:
+GET http://localhost:4004/Odata/v4/Catalog/Authors?$expand=books
+
+### Get borrowings with book and member details:
+GET http://localhost:4004/Odata/v4/Catalog/Borrowings?$expand=book,member
+
+### Get members with their borrowings AND the borrowed book:
+GET http://localhost:4004/Odata/v4/Catalog/Members?$expand=borrowings($expand=book)
+
+### Filter books by a specific author:
+
+GET http://localhost:4004/Odata/v4/Catalog/Books?$filter=author_ID eq a1a1a1a1-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+
+### Available books with calculated fields:
+GET http://localhost:4004/reports/AvailableBooks
+
+### Overdue borrowings with member contact info:
+GET http://localhost:4004/reports/OverdueBorrowings
+
+### Book pricing with GST calculations:
+GET http://localhost:4004/reports/BookPricing
+
+### Filter premium books only:
+GET http://localhost:4004/reports/BookPricing?$filter=priceCategory eq 'Premium'
+
+### Member activity:
+GET http://localhost:4004/reports/MemberActivity?$filter=isActive eq true
+
+### Without $expand — just the ID reference
+GET http://localhost:4004/library/Books?$select=title,author
+
+### With $expand — full author details included
+GET http://localhost:4004/library/Books?$select=ID,title&$expand=author($select=ID,firstName,lastName)
+
+### Cheapest books first (ascending is default)
+GET http://localhost:4004/library/Books?$orderby=price
+
+### Most expensive books first
+GET http://localhost:4004/library/Books?$orderby=price desc
+
+### Highest edition books first
+GET http://localhost:4004/library/Books?$orderby=edition desc
+
+### Alphabetical by title
+GET http://localhost:4004/library/Books?$orderby=title
+
+### Sort by genre, then by title within each genre
+GET http://localhost:4004/library/Books?$orderby=genre,title
+
+### Published date newest to oldest
+GET http://localhost:4004/library/Books?$orderby=publishedDate desc
+
+### Sort by multiple criteria with mixed directions
+GET http://localhost:4004/library/Books?$orderby=genre asc,price desc
+
+### First groups by genre A-Z, then within each genre: most expensive first
+GET http://localhost:4004/library/Books?$orderby=genre asc,price desc
+
+### First 2 books
+GET http://localhost:4004/library/Books?$top=2
+
+### First 5 books, sorted by price
+GET http://localhost:4004/library/Books?$orderby=price&$top=5
+
+### Page 1: First 3 items
+GET http://localhost:4004/library/Books?$top=3&$skip=0
+
+### Page 2: Next 3 items
+GET http://localhost:4004/library/Books?$top=3&$skip=3
+
+### Page 3: Next 3 items
+GET http://localhost:4004/library/Books?$top=3&$skip=2
+
+### Top 3 most expensive books
+GET http://localhost:4004/library/Books?$orderby=price desc&$top=3
+
+### Second page of results, 2 per page, sorted by title
+GET http://localhost:4004/library/Books?$orderby=title&$top=2&$skip=2
+
+
+
+### Filter Expression
+1."Show me all products that cost more than $50" → $filter=price gt 50
+2."Find customers from India" → $filter=country eq 'India'
+3."Get all active employees" → $filter=isActive eq true
+4."Show orders placed after March 2026" → $filter=orderDate gt 2026-03-31
+5."Find books with 'Lord' in the title" → $filter=contains(title, 'Lord')
+6."Products with stock between 10 and 100" → $filter=stock ge 10 and stock le 100
+7."Authors from UK or USA" → $filter=country eq 'UK' or country eq 'USA'
+8."Orders that are NOT delivered and cost over $500" → $filter=not (status eq 'Delivered') and totalAmount gt 500
+
+### expand Practice
+1. Get all books with their author name → GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=author($select=name)
+2. Get all authors with their list of books (title only) → GET http://localhost:4004/Odata/v4/Catalog/Authors?$expand=books($select=title)
+3. Get orders with customer details and order items → GET http://localhost:4004/Odata/v4/Catalog/Orders?$expand=customer,orderItems
+4. Get products with supplier name and category name → GET http://localhost:4004/Odata/v4/Catalog/Products?$expand=supplier($select=name),category($select=name)
+5. Get the 5 most recent orders with items and product names → GET http://localhost:4004/Odata/v4/Catalog/Orders?$top=5&$orderby=orderDate desc&$expand=orderItems($expand=product($select=name))
