@@ -147,3 +147,11 @@ GET http://localhost:4004/odata/v4/admin/Customers?$orderby=name asc&$top=2&$ski
 
 ### 5 Orders with status Created and amount over 1000, with customer details
 GET http://localhost:4004/odata/v4/admin/SalesOrders?$filter=status eq 'Created' and netAmount gt 1000&$expand=customer
+
+### 
+POST http://localhost:4004/odata/v4/sales/SalesOrders
+Content-Type: application/json
+
+{
+  
+}

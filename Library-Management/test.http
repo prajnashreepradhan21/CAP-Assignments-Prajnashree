@@ -1,24 +1,24 @@
 ### Get books WITH author details:
-GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=author
+GET http://localhost:4004/library/Books?$expand=author
 
 ### Get books WITH genre details:
-GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=genre
+GET http://localhost:4004/library/Books?$expand=genre
 
 ### Get books with BOTH author and genre:
-GET http://localhost:4004/Odata/v4/Catalog/Books?$expand=author,genre
+GET http://localhost:4004/library/Books?$expand=author,genre
 
 ### Get an author WITH all their books:
-GET http://localhost:4004/Odata/v4/Catalog/Authors?$expand=books
+GET http://localhost:4004/library/Authors?$expand=books
 
 ### Get borrowings with book and member details:
-GET http://localhost:4004/Odata/v4/Catalog/Borrowings?$expand=book,member
+GET http://localhost:4004/library/Borrowings?$expand=book,member
 
 ### Get members with their borrowings AND the borrowed book:
-GET http://localhost:4004/Odata/v4/Catalog/Members?$expand=borrowings($expand=book)
+GET http://localhost:4004/library/Members?$expand=borrowings($expand=book)
 
 ### Filter books by a specific author:
 
-GET http://localhost:4004/Odata/v4/Catalog/Books?$filter=author_ID eq a1a1a1a1-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+GET http://localhost:4004/library/Books?$filter=author_ID eq a1a1a1a1-aaaa-aaaa-aaaa-aaaaaaaaaaaa
 
 ### Available books with calculated fields:
 GET http://localhost:4004/reports/AvailableBooks

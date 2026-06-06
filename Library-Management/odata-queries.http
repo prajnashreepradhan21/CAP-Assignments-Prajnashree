@@ -104,4 +104,23 @@ GET http://localhost:4004/library/Books?$filter=availableCopies gt 0&$orderby=pr
 GET http://localhost:4004/library/Books?$orderby=language,price desc&$top=2&$skip=0&$count=true
 
 ### 6.3 Books with "CAP" in title, price 300+, sorted by price desc, only title and price
-GET http://localhost:4004/library/Books?$filter=contains(title,'CAP') and price ge 300&$orderby=price desc&$sele 
+GET http://localhost:4004/library/Books?$filter=contains(title,'CAP') and price ge 300&$orderby=price desc&$select=title,price
+
+### Read ALL records
+GET http://localhost:4004/library/Books
+
+
+### Read ONE record by key
+GET http://localhost:4004/library/Books(b1000001-0000-0000-0000-000000000001)
+
+
+### Read with query options
+GET http://localhost:4004/library/Books?$filter=genre eq 'PROG'&$expand=author
+
+
+### Read nested/related data directly
+GET http://localhost:4004/library/Books(1a2b3c4d-1111-1111-1111-111111111111)/author
+
+
+### Count records
+GET http://localhost:4004/library/Books/$count
