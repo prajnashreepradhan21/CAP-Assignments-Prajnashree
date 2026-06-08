@@ -22,7 +22,7 @@ File or Folder | Purpose
 Learn more at <https://cap.cloud.sap>.
 
 
-###
+### Assignment
 
 Filter Expression
 1."Show me all products that cost more than $50" → $filter=price gt 50
