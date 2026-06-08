@@ -12,7 +12,9 @@ For each business scenario, write the COMPLETE OData URL. Assume:
 ### Scenario 1: Product Search
 > "A customer searches for 'laptop' in the product name. Show the first 5 matching products with their name and price, sorted by price (cheapest first)."
 
-Your URL: GET http://localhost:4004/sales/Products ?$filter=contains(tolower(productName),'laptop') &$select=productName,price &$orderby=price &$top=5
+Your URL: 
+### 
+GET http://localhost:4004/sales/Products ?$filter=contains(tolower(productName),'laptop') &$select=productName,price &$orderby=price &$top=5
 
 
 ---
@@ -74,7 +76,9 @@ Your URL: GET http://localhost:4004/sales/Orders(ord-001-uuid) ?$expand=customer
 ### Scenario 10: Multi-condition Search
 > "Find books that are either Fantasy or Science Fiction genre, published after 2000, with a rating of at least 4.0. Show title, genre, rating, and publish date. Sort by genre then by rating descending."
 
-Your URL: GET http://localhost:4004/catalog/Books ?$filter=(genre eq 'Fantasy' or genre eq 'Science Fiction') and publishDate gt 2000-01-01 and rating ge 4.0 &$select=title,genre,rating,publishDate &$orderby=genre,rating desc
+Your URL: 
+###
+GET http://localhost:4004/library/Books?$filter=(genre eq 'Fantasy' or genre eq 'Science Fiction') and publishDate gt 2000-01-01 and rating ge 4.0 &$select=title,genre,rating,publishDate &$orderby=genre,rating desc
 
 
 
