@@ -121,3 +121,9 @@ Content-Type: application/json
   "trackingNumber": "TRK-2026-ABC123",
   "carrier": "FedEx"
 }
+###
+
+GET http://localhost:4004/purchasing/PurchaseOrderItems(ID='5d280311-f296-4a51-970b-e3bf0b7385db',IsActiveEntity=true)?$expand=product
+
+###
+GET http://localhost:4004/purchasing/PurchaseOrderItems?$expand=product
