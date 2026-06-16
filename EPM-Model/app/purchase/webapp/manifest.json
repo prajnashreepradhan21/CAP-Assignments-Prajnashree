@@ -144,9 +144,23 @@
                     "route": "PurchaseOrderItemsObjectPage"
                   }
                 }
+              },
+           "content": {
+            "body": {
+            "sections": {
+            "customPOSection": {
+             "template": "purchase.ext.CustomSection",
+             "title": "PO Custom Section",
+             "position": {
+              "placement": "After",
+              "anchor": "GeneralInformation"
               }
             }
           }
+        }
+       }
+     }
+      }
         },
         "PurchaseOrderItemsObjectPage": {
           "type": "Component",

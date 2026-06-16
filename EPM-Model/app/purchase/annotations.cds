@@ -114,18 +114,10 @@ annotate PurchasingService.PurchaseOrders with @UI: {
 };
 
 annotate PurchasingService.PurchaseOrders with {
-  poNumber     @Common.Label : 'PO Number'     @Common.FieldControl : poFieldControl;
-  supplier     @Common.FieldControl : poFieldControl;
-  priority     @Common.Label : 'Priority'      @Common.FieldControl : poFieldControl;
-  orderDate    @Common.Label : 'Order Date'    @Common.FieldControl : poFieldControl;
-  expectedDate @Common.Label : 'Expected Date' @Common.FieldControl : poFieldControl;
-  currency     @Common.FieldControl : poFieldControl;
-
-  status        @Common.Label : 'Status';
-  totalAmount   @Common.Label : 'Total Amount';
-  taxAmount     @Common.Label : 'Tax Amount';
-  netAmount     @Common.Label : 'Net Amount';
-  progressValue @Common.Label : 'Progress';
+ poNumber     @title : 'PO Number'     @Common.Label : 'PO Number'     @Common.FieldControl : poFieldControl;
+ priority     @title : 'Priority'      @Common.Label : 'Priority'      @Common.FieldControl : poFieldControl;
+ orderDate    @title : 'Order Date'    @Common.Label : 'Order Date'    @Common.FieldControl : poFieldControl;
+ expectedDate @title : 'Expected Date' @Common.Label : 'Expected Date' @Common.FieldControl : poFieldControl;
 
   supplier @(
     Common.Label : 'Supplier',
@@ -136,7 +128,7 @@ annotate PurchasingService.PurchaseOrders with {
       Parameters : [
         {
           $Type : 'Common.ValueListParameterInOut',
-          LocalDataProperty : supplier,
+          LocalDataProperty : supplier_ID ,
           ValueListProperty : 'ID'
         },
         {
@@ -196,17 +188,17 @@ annotate PurchasingService.PurchaseOrderItems with @UI: {
     { $Type: 'UI.DataField', Value: product_ID, Label: 'Product' },
     { $Type: 'UI.DataField', Value: quantity, Label: 'Quantity' },
     { $Type: 'UI.DataField', Value: unitPrice, Label: 'Unit Price' },
-    { $Type: 'UI.DataField', Value: totalPrice, Label: 'Total Price' }
+    { $Type: 'UI.DataField', Value: totalPrice, Label: 'Total Price', ![@Common.FieldControl]: #ReadOnly }
   ]
 }
 };
 
 annotate PurchasingService.PurchaseOrderItems with {
+
   product_ID @(
     Common.Label : 'Product',
     Common.Text : product.name,
     Common.TextArrangement : #TextOnly,
-    Common.ValueListWithFixedValues : false,
     Common.ValueList : {
       Label : 'Products',
       CollectionPath : 'Products',
@@ -232,10 +224,40 @@ annotate PurchasingService.PurchaseOrderItems with {
     }
   );
 
+ product @(
+  Common.Label : 'Product',
+  Common.Text : product.name,
+  Common.TextArrangement : #TextOnly,
+  Common.ValueList : {
+    Label : 'Products',
+    CollectionPath : 'Products',
+    Parameters : [
+      {
+        $Type : 'Common.ValueListParameterInOut',
+        LocalDataProperty : product_ID,
+        ValueListProperty : 'ID'
+      },
+      {
+        $Type : 'Common.ValueListParameterDisplayOnly',
+        ValueListProperty : 'name'
+      },
+      {
+        $Type : 'Common.ValueListParameterDisplayOnly',
+        ValueListProperty : 'price'
+      },
+      {
+        $Type : 'Common.ValueListParameterDisplayOnly',
+        ValueListProperty : 'stock'
+      }
+    ]
+  }
+);
+
   quantity   @Common.Label : 'Quantity';
   unitPrice  @Common.Label : 'Unit Price';
   totalPrice @Common.Label : 'Total Price';
 };
+
 
 annotate PurchasingService.Products with @UI: {
 
@@ -316,15 +338,19 @@ annotate PurchasingService.Suppliers with {
 };
 
 annotate PurchasingService.PurchaseOrderItems with @(
-  Common.SideEffects: {
-    SourceProperties: ['quantity', 'unitPrice'],
-    TargetProperties: ['totalPrice']
+  Common.SideEffects #TotalPriceSideEffect : {
+    SourceProperties : [ 'quantity', 'unitPrice' ],
+    TargetProperties : [ 'totalPrice' ]
   }
 );
 
+annotate PurchasingService.PurchaseOrderItems with {
+  totalPrice @Common.FieldControl : #ReadOnly;
+};
+
 annotate PurchasingService.PurchaseOrders with @(
-  Common.SideEffects#TotalRefresh: {
-    SourceEntities: ['items'],
-    TargetProperties: ['totalAmount', 'taxAmount', 'netAmount']
+  Common.SideEffects #TotalRefresh : {
+    SourceEntities : [ 'items' ],
+    TargetProperties : [ 'totalAmount', 'taxAmount', 'netAmount' ]
   }
 );

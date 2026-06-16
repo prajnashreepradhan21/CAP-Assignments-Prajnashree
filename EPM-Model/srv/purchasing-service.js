@@ -65,6 +65,19 @@ module.exports = function () {
     const rows = Array.isArray(data) ? data : [data];
     rows.forEach(setUIFields);
   });
+
+  this.after('READ', 'PurchaseOrderItems', (data) => {
+  const rows = Array.isArray(data) ? data : [data];
+
+  rows.forEach(item => {
+    if (!item) return;
+
+    if (!item.totalPrice && item.quantity && item.unitPrice) {
+      item.totalPrice = +(Number(item.quantity) * Number(item.unitPrice)).toFixed(2);
+    }
+  });
+});
+
   this.before('UPDATE', 'PurchaseOrders', async (req) => {
   const { ID } = req.data;
 
@@ -107,14 +120,14 @@ this.before(['CREATE', 'UPDATE'], 'PurchaseOrderItems', async (req) => {
 
   if (req.event === 'UPDATE') {
     const old = await SELECT.one.from('com.epm.PurchaseOrderItems')
-      .where({ ID: req.data.ID });
+      .where({ ID: req.data.ID || req.params?.[0]?.ID });
 
     quantity = quantity ?? old?.quantity;
     unitPrice = unitPrice ?? old?.unitPrice;
   }
 
   if (quantity !== undefined && unitPrice !== undefined) {
-    req.data.totalPrice = +(quantity * unitPrice).toFixed(2);
+    req.data.totalPrice = +(Number(quantity) * Number(unitPrice)).toFixed(2);
   }
 });
 
@@ -143,9 +156,13 @@ this.before(['CREATE', 'UPDATE'], 'PurchaseOrderItems', async (req) => {
       .where({ ID: orderId });
   }
 
-  this.after(['CREATE', 'UPDATE'], 'PurchaseOrderItems', async (_, req) => {
-    await recalculatePO(req.data.order_ID);
-  });
+ this.after(['CREATE', 'UPDATE'], 'PurchaseOrderItems', async (data, req) => {
+  const orderId = req.data.order_ID || data?.order_ID;
+
+  if (orderId) {
+    await recalculatePO(orderId);
+  }
+});
 
   this.on('submit', 'PurchaseOrders', async (req) => {
     const { ID } = req.params[0];

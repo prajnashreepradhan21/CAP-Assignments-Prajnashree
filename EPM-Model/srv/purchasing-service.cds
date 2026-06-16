@@ -52,7 +52,7 @@ entity PurchaseOrders as projection on db.PurchaseOrders {
     daysOpen    : Integer;
   };
 };
-  entity PurchaseOrderItems as projection on db.PurchaseOrderItems {
+entity PurchaseOrderItems as projection on db.PurchaseOrderItems {
   *,
   product
 };
