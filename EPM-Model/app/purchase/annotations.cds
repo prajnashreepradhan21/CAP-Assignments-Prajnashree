@@ -2,14 +2,11 @@ using { PurchasingService } from '../../srv/purchasing-service';
 
 annotate PurchasingService.PurchaseOrders with @UI: {
 
-  SelectionFields: [
-    poNumber,
-    status,
-    supplier,
-    priority,
-    orderDate,
-    expectedDate
-  ],
+ SelectionFields: [
+  poNumber,
+  status,
+  supplier
+],
 
   LineItem: [
     { Value: poNumber, Label: 'PO Number' },
@@ -78,7 +75,7 @@ annotate PurchasingService.PurchaseOrders with @UI: {
       { Value: priority, Label: 'Priority' },
       { Value: orderDate, Label: 'Order Date' },
       { Value: expectedDate, Label: 'Expected Date' },
-      { Value: currency, Label: 'Currency' },
+     { $Type: 'UI.DataField', Value: currency_code, Label: 'Currency' },
       { Value: status, Label: 'Status', Criticality: statusCriticality },
       { Value: totalAmount, Label: 'Total Amount' },
       { Value: taxAmount, Label: 'Tax Amount' },
@@ -147,13 +144,31 @@ annotate PurchasingService.PurchaseOrders with {
     }
   );
 
-  currency @(
-    Common.Label : 'Currency',
-    Common.Text : currency.code,
-    Common.TextArrangement : #TextOnly
-  );
+ currency_code @(
+  Common.Label : 'Currency',
+  Common.Text : currency.name,
+  Common.TextArrangement : #TextOnly,
+  Common.ValueList : {
+    Label : 'Currencies',
+    CollectionPath : 'Currencies',
+    Parameters : [
+      {
+        $Type : 'Common.ValueListParameterInOut',
+        LocalDataProperty : currency_code,
+        ValueListProperty : 'code'
+      },
+      {
+        $Type : 'Common.ValueListParameterDisplayOnly',
+        ValueListProperty : 'name'
+      },
+      {
+        $Type : 'Common.ValueListParameterDisplayOnly',
+        ValueListProperty : 'symbol'
+      }
+    ]
+  }
+);
 };
-
 annotate PurchasingService.PurchaseOrderItems with @UI: {
 
   LineItem: [

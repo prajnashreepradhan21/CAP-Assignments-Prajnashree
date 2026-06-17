@@ -127,3 +127,6 @@ GET http://localhost:4004/purchasing/PurchaseOrderItems(ID='5d280311-f296-4a51-9
 
 ###
 GET http://localhost:4004/purchasing/PurchaseOrderItems?$expand=product
+
+### Test totalPrice calculation in PurchaseOrderItems
+GET http://localhost:4004/purchasing/PurchaseOrderItems?$select=quantity,unitPrice,totalPrice
