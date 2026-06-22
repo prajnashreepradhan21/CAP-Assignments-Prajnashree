@@ -61,6 +61,10 @@ module.exports = function () {
     }
   };
 
+  this.before('CREATE', 'PurchaseOrders', req => {
+  req.data.createdBy = req.user.id;
+});
+
   this.after('READ', 'PurchaseOrders', (data) => {
     const rows = Array.isArray(data) ? data : [data];
     rows.forEach(setUIFields);
