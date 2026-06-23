@@ -18,3 +18,90 @@ Authorization: Basic bWFuYWdlcjptYW5hZ2Vy
 ### Admin - should access Suppliers
 GET http://localhost:4004/purchasing/Suppliers
 Authorization: Basic YWRtaW46YWRtaW4=
+
+### Alice - Read POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic YWxpY2U6YWxpY2U=
+
+###
+
+### Bob - Read POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Ym9iOmJvYg==
+
+###
+
+### Carol (Viewer) - Read POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Y2Fyb2w6Y2Fyb2w=
+
+###
+
+### Dave (Admin) - Read POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic ZGF2ZTpkYXZl
+
+###
+
+### Alice - Create PO
+### Alice - Create PO
+POST http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic YWxpY2U6YWxpY2U=
+Content-Type: application/json
+
+{
+  "poNumber": "PO-ALICE-001"
+}
+
+###
+
+### Bob - Create PO
+POST http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Ym9iOmJvYg==
+Content-Type: application/json
+
+{
+  "poNumber": "PO-BOB-001"
+}
+
+###
+
+### Carol (Viewer) - Create PO (Should Fail)
+POST http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Y2Fyb2w6Y2Fyb2w=
+Content-Type: application/json
+
+{
+  "poNumber": "PO-CAROL-001"
+}
+
+###
+
+### Dave (Admin) - Read Suppliers
+GET http://localhost:4004/purchasing/Suppliers
+Authorization: Basic ZGF2ZTpkYXZl
+
+###
+
+### Alice - Read Suppliers (Should Fail)
+GET http://localhost:4004/purchasing/Suppliers
+Authorization: Basic YWxpY2U6YWxpY2U=
+
+###
+
+### Carol - Read Products
+GET http://localhost:4004/purchasing/Products
+Authorization: Basic Y2Fyb2w6Y2Fyb2w=
+
+###
+
+### Alice - Read Products
+GET http://localhost:4004/purchasing/Products
+Authorization: Basic YWxpY2U6YWxpY2U=
+
+###
+
+### Dave - Read Products
+GET http://localhost:4004/purchasing/Products
+Authorization: Basic ZGF2ZTpkYXZl
+
