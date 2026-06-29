@@ -1,15 +1,39 @@
 {
-  "xsappname": "po-management",
+  "xsappname": "epm-complete-f709e662trial-dev",
   "tenant-mode": "dedicated",
   "scopes": [
-    { "name": "$XSAPPNAME.Read", "description": "Read PO data" },
-    { "name": "$XSAPPNAME.Create", "description": "Create and edit Purchase Orders" },
-    { "name": "$XSAPPNAME.Approve", "description": "Approve Purchase Orders" },
-    { "name": "$XSAPPNAME.Delete", "description": "Delete Purchase Orders" },
-    { "name": "$XSAPPNAME.Admin", "description": "Admin access" },
-    { "name": "$XSAPPNAME.Viewer", "description": "Viewer role" },
-    { "name": "$XSAPPNAME.PurchaseManager", "description": "Purchase Manager role" },
-    { "name": "$XSAPPNAME.Administrator", "description": "Administrator role" }
+    {
+      "name": "$XSAPPNAME.Read",
+      "description": "Read PO data"
+    },
+    {
+      "name": "$XSAPPNAME.Create",
+      "description": "Create and edit Purchase Orders"
+    },
+    {
+      "name": "$XSAPPNAME.Approve",
+      "description": "Approve Purchase Orders"
+    },
+    {
+      "name": "$XSAPPNAME.Delete",
+      "description": "Delete Purchase Orders"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin access"
+    },
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "Viewer role"
+    },
+    {
+      "name": "$XSAPPNAME.PurchaseManager",
+      "description": "Purchase Manager role"
+    },
+    {
+      "name": "$XSAPPNAME.Administrator",
+      "description": "Administrator role"
+    }
   ],
   "attributes": [],
   "role-templates": [
@@ -44,15 +68,21 @@
   "role-collections": [
     {
       "name": "PO_Viewer",
-      "role-template-references": ["$XSAPPNAME.Viewer"]
+      "role-template-references": [
+        "$XSAPPNAME.Viewer"
+      ]
     },
     {
       "name": "PO_Manager",
-      "role-template-references": ["$XSAPPNAME.PurchaseManager"]
+      "role-template-references": [
+        "$XSAPPNAME.PurchaseManager"
+      ]
     },
     {
       "name": "PO_Admin",
-      "role-template-references": ["$XSAPPNAME.Administrator"]
+      "role-template-references": [
+        "$XSAPPNAME.Administrator"
+      ]
     }
   ]
 }

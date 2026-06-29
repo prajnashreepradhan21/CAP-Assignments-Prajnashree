@@ -1,36 +1,42 @@
 _schema-version: 3.3.0
 ID: epm-complete
+description: PO Management - CAP application with Fiori Elements UI
 version: 1.0.0
-description: "EPM Model- CAP application with Fiori Elements UI"
+
 parameters:
+  deploy_mode: html5-repo
   enable-parallel-deployments: true
+
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npm ci
         - npx cds build --production
+
 modules:
+
   - name: epm-complete-srv
     type: nodejs
     path: gen/srv
+    properties:
+      LOG_LEVEL: info
+      NODE_ENV: production
     parameters:
-      instances: 1
       buildpack: nodejs_buildpack
       memory: 256M
       disk-quota: 512M
-    properties:
-       NODE_ENV: production
-       LOG_LEVEL: info
+      instances: 1
     build-parameters:
       builder: npm-ci
     provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+      - name: srv-api
         properties:
           srv-url: ${default-url}
     requires:
       - name: epm-complete-db
       - name: epm-complete-auth
+      - name: epm-complete-destination-service
 
   - name: epm-complete-db-deployer
     type: hdb
@@ -39,47 +45,119 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: epm-complete-db
-  - name: epm-complete
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
+
+  - name: epmcompletepurchase
+    type: html5
+    path: app/purchase
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      build-result: dist
+      supported-platforms: []
+
+  - name: epm-complete-app-deployer
+    type: com.sap.application.content
+    path: gen
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: epmcompletepurchase
+          artifacts:
+            - purchase.zip
+          target-path: app/
     requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
       - name: epm-complete-auth
-    provides:
-      - name: app-api
-        properties:
-          app-protocol: ${protocol}
-          app-uri: ${default-uri}
+      - name: srv-api
+      - name: epm-complete-html5-repo-host
+        parameters:
+          content-target: true
+
+  - name: epm-complete-destinations
+    type: com.sap.application.content
+    requires:
+      - name: epm-complete-auth
+        parameters:
+          service-key:
+            name: epm-complete-auth-key
+      - name: epm-complete-html5-repo-host
+        parameters:
+          service-key:
+            name: epm-complete-html5-repo-host-key
+      - name: srv-api
+      - name: epm-complete-destination-service
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: epm-complete-html5-repository
+              ServiceInstanceName: epm-complete-html5-repo-host
+              ServiceKeyName: epm-complete-html5-repo-host-key
+              sap.cloud.service: epm-complete
+            - Name: epm-complete-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: epm-complete-auth
+              ServiceKeyName: epm-complete-auth-key
+              sap.cloud.service: epm-complete
 
 resources:
+
   - name: epm-complete-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+
   - name: epm-complete-auth
     type: org.cloudfoundry.managed-service
     parameters:
+      path: ./xs-security.json
       service: xsuaa
       service-plan: application
-      path: ./xs-security.json
+      service-keys:
+        - name: epm-complete-auth-key
       config:
-        xsappname: epm-complete-${org}-${space}
+        xsappname: epm-complete-f709e662trial-dev
         tenant-mode: dedicated
         oauth2-configuration:
           credential-types:
-            - "binding-secret"
-            - "x509"
-          redirect-uris:
-            - https://*~{app-api/app-uri}/**
-    requires:
-      - name: app-api
+            - binding-secret
+            - x509
+
+  - name: epm-complete-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-keys:
+        - name: epm-complete-html5-repo-host-key
+
+  - name: epm-complete-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+
+  - name: epm-complete-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: ui5
+                URL: https://ui5.sap.com
+                Type: HTTP
+                ProxyType: Internet
+                Authentication: NoAuthentication
