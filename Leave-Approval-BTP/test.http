@@ -1,0 +1,13 @@
+### Trigger Leave Process
+
+POST http://localhost:4004/odata/v4/workflow/triggerLeaveProcess
+Content-Type: application/json
+
+{
+    "employeeID": "1001",
+    "employeeName": "Prajnashree",
+    "leaveDate": "2026-07-01",
+    "approvalEmail": "prajnashreepradhan21@gmail.com",
+    "leaveType": "Annual Leave",
+    "comments": "Triggered from CAP"
+}

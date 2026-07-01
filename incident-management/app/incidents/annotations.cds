@@ -121,8 +121,8 @@ annotate service.Incidents with {
             ],
         },
         Common.Text : customer.name,
-        Common.Text.@UI.TextArrangement : #TextOnly,
-        Common.ValueListWithFixedValues : true,
+        Common.Text.@UI.TextArrangement : #TextOnly
+       
     )
 };
 

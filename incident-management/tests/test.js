@@ -1,8 +1,7 @@
-const cds = require('@sap/cds/lib')
-const { default: axios } = require('axios')
-const { GET, POST, DELETE, PATCH, expect } = cds.test(__dirname + '/..')
-
-axios.defaults.auth = { username: 'alice', password: 'alice' }
+const cds = require('@sap/cds')
+const test = cds.test(__dirname + '/..', '--with-mocks')
+const { GET, POST, DELETE, PATCH, expect } = test
+test.defaults.auth = { username: 'alice', password: 'alice' }
 
 jest.setTimeout(11111)
 
